@@ -6,4 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/wood_h"
-    tools:context=".MainActivity" />
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/main_name"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:fontFamily="@font/Skyfont-NonCommercial"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textSize="36sp" />
+</LinearLayout>
