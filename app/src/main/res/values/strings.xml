@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">CureServ</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
