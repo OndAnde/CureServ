@@ -21,31 +21,33 @@
         android:id="@+id/fr_place"
         android:name="com.ondande.cureserv.main_logo"
         android:layout_width="match_parent"
-        android:layout_height="543dp"
-        />
+        android:layout_height="263dp" />
 
-    <RelativeLayout
-        android:id="@+id/btn_auth_group"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
+
 
         <Button
             android:id="@+id/btn_sign_up"
             android:layout_width="190dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
             android:layout_marginEnd="3dp"
+            android:onClick="Change"
             android:text="@string/sign_up" />
 
-        <Button
-            android:id="@+id/btn_sign_in"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="-3dp"
-            android:layout_toStartOf="@+id/btn_sign_up"
-            android:text="@string/sign_in" />
-    </RelativeLayout>
+    <Button
+        android:id="@+id/btn_sign_in"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="-3dp"
+        android:layout_toStartOf="@+id/btn_sign_up"
+        android:onClick="Change"
+        android:text="@string/sign_in" />
+
 
 </LinearLayout>

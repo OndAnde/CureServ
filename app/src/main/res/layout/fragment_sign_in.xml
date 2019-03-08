@@ -4,16 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".sign_in"
-    android:background="@color/colorAccent">
-
-    <TextView
-        android:id="@+id/fr1_name"
+    >
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="68dp"
-        android:fontFamily="@font/app_name_font"
-        android:text="123"
-        android:textAlignment="center"
-        android:textSize="65sp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/phone_sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="phone" />
+
+        <EditText
+            android:id="@+id/pass_sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword" />
+        <Button
+            android:id="@+id/btn_sign_in_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 
 </FrameLayout>

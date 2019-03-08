@@ -3,6 +3,10 @@
     <string name="sign_up">Sign Up</string>
     <string name="sign_in">Sign In</string>
 
+    <string name="FACEBOOK_APP_ID">691636434586348</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">9d62c193a1f23499de99317999949448</string>
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
