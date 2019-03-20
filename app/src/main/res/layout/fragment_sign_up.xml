@@ -46,6 +46,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:met_floatingLabel="highlight"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edt_spec"
+                android:hint="Specialization"
+                android:textSize="18sp"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight"/>
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOff="Patient"
+                android:textOn="Doctor"/>
         </LinearLayout>
         <Button
             android:id="@+id/btn_conf_s_up"

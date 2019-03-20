@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_sign_up;
     private static final int REQUEST_CODE = 1000;
     CureServAPI mService;
+    String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +161,10 @@ public class MainActivity extends AppCompatActivity {
         assert fragment != null;
         ft.replace(R.id.fr_place, fragment);
         ft.commit();
+    }
+
+    public void finishRegistration(String name, String address, String birth) {
+        mService.registerNewUser(phone,name,address,birth,"1");
     }
 
 //    public void Registration(String phone){
