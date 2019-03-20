@@ -28,6 +28,8 @@ import com.facebook.accountkit.ui.LoginType;
 import com.ondande.cureserv.Model.CheckUserResponse;
 import com.ondande.cureserv.Retrofit.CureServAPI;
 import com.ondande.cureserv.Utils.Common;
+import com.rengwuxian.materialedittext.MaterialEditText;
+import com.szagurskii.patternedtextwatcher.PatternedTextWatcher;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -159,4 +161,26 @@ public class MainActivity extends AppCompatActivity {
         ft.replace(R.id.fr_place, fragment);
         ft.commit();
     }
+
+//    public void Registration(String phone){
+//
+//
+//
+//        edt_name = (MaterialEditText)view.findViewById(R.id.edt_name);
+//        edt_address = (MaterialEditText)view.findViewById(R.id.edt_address);
+//        edt_birth = (MaterialEditText)view.findViewById(R.id.edt_birth);
+//
+//        Button btn_conf_s_up = (Button)view.findViewById(R.id.btn_conf_s_up);
+//
+//        edt_birth.addTextChangedListener(new PatternedTextWatcher("####-##-##"));
+//
+//        btn_conf_s_up.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final SpotsDialog alertDialog = new SpotsDialog(sign_up.this);
+//                alertDialog.show();
+//                alertDialog.setMessage("Waiting...");
+//            }
+//        });
+//    }
 }

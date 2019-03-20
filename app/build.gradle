@@ -33,5 +33,6 @@ dependencies {
     implementation 'com.facebook.android:account-kit-sdk:4.+'
     implementation 'com.github.d-max:spots-dialog:0.7@aar'
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
+    implementation 'com.szagurskii:patternedtextwatcher:0.5.0'
 
 }
