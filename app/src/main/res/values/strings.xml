@@ -2,6 +2,7 @@
     <string name="app_name">CureServ</string>
     <string name="sign_up">Sign Up</string>
     <string name="sign_in">Sign In</string>
+    <string name="confirm">Confirm</string>
 
     <string name="FACEBOOK_APP_ID">691636434586348</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">9d62c193a1f23499de99317999949448</string>
