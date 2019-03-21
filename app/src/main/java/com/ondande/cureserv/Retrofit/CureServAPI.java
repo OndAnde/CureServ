@@ -19,5 +19,8 @@ public interface CureServAPI {
                                @Field("name") String name,
                                @Field("birthdate") String birthdate,
                                @Field("address") String address,
-                               @Field("permission") String permission);
+                               @Field("permission") int permission,
+                               @Field("status") String status,
+                               @Field("card") String card,
+                               @Field("specialization") String spec);
 }

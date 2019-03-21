@@ -5,14 +5,17 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.support.annotation.Nullable;
+import android.support.design.button.MaterialButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -26,6 +29,7 @@ import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
 import com.ondande.cureserv.Model.CheckUserResponse;
+import com.ondande.cureserv.Model.User;
 import com.ondande.cureserv.Retrofit.CureServAPI;
 import com.ondande.cureserv.Utils.Common;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -44,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_sign_up;
     private static final int REQUEST_CODE = 1000;
     CureServAPI mService;
-    String phone;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
                     AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
                         @Override
-                        public void onSuccess(Account account) {
+                        public void onSuccess(final Account account) {
                             mService.checkUserExists(account.getPhoneNumber().toString())
                                     .enqueue(new Callback<CheckUserResponse>() {
                                         @Override
@@ -108,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                                             else{
                                                 alertDialog.dismiss();
 
-                                                Change(2);
+                                                showRegisterDialog(account.getPhoneNumber().toString());
                                             }
                                         }
 
@@ -125,8 +129,79 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                 }
+
             }
         }
+
+    }
+
+    private void showRegisterDialog(final String phone) {
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        alertDialog.setTitle("SIGN UP");
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View sign_up = inflater.inflate(R.layout.sign_up, null);
+        final MaterialEditText edt_name = (MaterialEditText)sign_up.findViewById(R.id.edt_name);
+        final MaterialEditText edt_address = (MaterialEditText)sign_up.findViewById(R.id.edt_address);
+        final MaterialEditText edt_birth = (MaterialEditText)sign_up.findViewById(R.id.edt_birth);
+
+        MaterialButton btn_conf = (MaterialButton)sign_up.findViewById(R.id.btn_conf);
+
+        edt_birth.addTextChangedListener(new PatternedTextWatcher("####-##-##"));
+
+        btn_conf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                alertDialog.create().dismiss();
+
+                final SpotsDialog waitDialog = new SpotsDialog(MainActivity.this);
+                waitDialog.show();
+                waitDialog.setMessage("Waiting...");
+                if (TextUtils.isEmpty(edt_name.getText().toString())) {
+                    Toast.makeText(MainActivity.this, "Please enter your name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(edt_address.getText().toString())) {
+                    Toast.makeText(MainActivity.this, "Please enter your address", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(edt_birth.getText().toString())) {
+                    Toast.makeText(MainActivity.this, "Please enter your birthdate", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                mService.registerNewUser(phone,
+                        edt_name.getText().toString(),
+                        edt_birth.getText().toString(),
+                        edt_address.getText().toString(),
+                        1,
+                        "good",
+                        "1",
+                        "psychologist")
+                        .enqueue(new Callback<User>() {
+                            @Override
+                            public void onResponse(Call<User> call, Response<User> response) {
+                                waitDialog.dismiss();
+
+                                User user = response.body();
+                                if(TextUtils.isEmpty(user.getError_msg())){
+                                    Toast.makeText(MainActivity.this, "User register successfully", Toast.LENGTH_SHORT);
+
+
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<User> call, Throwable t) {
+                                waitDialog.dismiss();
+                            }
+                        });
+            }
+
+        });
+        alertDialog.setView(sign_up);
+        alertDialog.show();
     }
 
     private void printKeyHash() {
@@ -145,47 +220,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void Change(int val){
-        Fragment fragment = null;
 
-        switch (val){
-            case 1:
-                fragment = new sign_in();
-                break;
-            case 2:
-                fragment = new sign_up();
-                break;
-        }
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        assert fragment != null;
-        ft.replace(R.id.fr_place, fragment);
-        ft.commit();
-    }
-
-    public void finishRegistration(String name, String address, String birth) {
-        mService.registerNewUser(phone,name,address,birth,"1");
-    }
-
-//    public void Registration(String phone){
-//
-//
-//
-//        edt_name = (MaterialEditText)view.findViewById(R.id.edt_name);
-//        edt_address = (MaterialEditText)view.findViewById(R.id.edt_address);
-//        edt_birth = (MaterialEditText)view.findViewById(R.id.edt_birth);
-//
-//        Button btn_conf_s_up = (Button)view.findViewById(R.id.btn_conf_s_up);
-//
-//        edt_birth.addTextChangedListener(new PatternedTextWatcher("####-##-##"));
-//
-//        btn_conf_s_up.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final SpotsDialog alertDialog = new SpotsDialog(sign_up.this);
-//                alertDialog.show();
-//                alertDialog.setMessage("Waiting...");
-//            }
-//        });
-//    }
 }
